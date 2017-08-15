@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="quicksidebar-1.0.3">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.android/build-cache/aaf2587bbad49c80e1dc09bb96a11cb4a7caea67/output/res" />
+      <root url="jar://$USER_HOME$/.android/build-cache/aaf2587bbad49c80e1dc09bb96a11cb4a7caea67/output/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.bigkoo/quicksidebar/1.0.3/e971e5722966f413048d3fcefd4f50cdc3cdf0fd/quicksidebar-1.0.3-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

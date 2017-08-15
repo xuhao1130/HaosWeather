@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Haos 天气</string>
+    <string name="about_haos_title">About Haos Weather</string>
+    <string name="about_haos_text">
+        这是一款遍及中国各地的天气预报APP，你可以自由切换查看各个城市的天气信息以及小建议。更多功能正待开发，敬请期待。
+    </string>
+    <string name="about_haos_message">
+        如有任何建议，请联系Holonce
+    </string>
+    <string name="version">版本号2.1.0</string>
+    <string name="login">Login</string>
+    <string name="version_mes">本次更新：修复了AQI和PM2.5指数没有显示的问题； 新增了下拉刷新的动画效果 ；更正了生活建议的内容。</string>
+</resources>
