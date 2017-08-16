@@ -1,1 +1,1 @@
-include ':app', 'WaterDropListView_1', ':circlerefresh'
+include ':app', 'WaterDropListView_1', ':circlerefresh', 'FloatingTextView'

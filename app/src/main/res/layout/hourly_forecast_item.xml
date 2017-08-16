@@ -3,6 +3,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="15dp">
 
+
     <TextView
         android:id="@+id/time_text"
         android:layout_width="0dp"
@@ -10,6 +11,16 @@
         android:layout_gravity="center_vertical"
         android:layout_weight="0.8"
         android:textColor="#fff"/>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.7">
+        <ImageView
+            android:id="@+id/weather_pic"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
 
     <TextView
         android:id="@+id/weather_text"

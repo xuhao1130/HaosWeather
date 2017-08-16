@@ -2,17 +2,17 @@ package com.coolweather.android;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
+
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.preference.PreferenceManager;
+import android.provider.ContactsContract;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,18 +30,12 @@ import com.coolweather.android.gson.Weather;
 import com.coolweather.android.service.AutoUpdateService;
 import com.coolweather.android.util.HttpUtil;
 import com.coolweather.android.util.Utility;
+import com.oguzdev.circularfloatingactionmenu.library.FloatingActionButton;
+import com.oguzdev.circularfloatingactionmenu.library.FloatingActionMenu;
+import com.oguzdev.circularfloatingactionmenu.library.SubActionButton;
 import com.tuesda.walker.circlerefresh.CircleRefreshLayout;
-import com.yalantis.contextmenu.lib.ContextMenuDialogFragment;
-import com.yalantis.contextmenu.lib.MenuObject;
-import com.yalantis.contextmenu.lib.MenuParams;
-
-import org.w3c.dom.Text;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -88,6 +82,9 @@ public class WeatherActivity extends AppCompatActivity {
     private String str;
     private int length;
 
+    private ImageView icon;
+    private String wet;
+    private String wet1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,6 +109,8 @@ public class WeatherActivity extends AppCompatActivity {
         forecastLayout = (LinearLayout) findViewById(R.id.forecast_layout);
         hourlyForecastLayout=(LinearLayout) findViewById(R.id.hourly_forecast_layout);
 
+        icon=new ImageView(this);
+
         uvText = (TextView) findViewById(R.id.uv_text);
         visText = (TextView) findViewById(R.id.vis_text);
         comfortText = (TextView) findViewById(R.id.comfort_text);
@@ -133,6 +132,24 @@ public class WeatherActivity extends AppCompatActivity {
             weatherLayout.setVisibility(View.INVISIBLE);
             requestWeather(mWeatherId);
         }
+
+        /**
+         * circular menu
+         */
+        icon.setImageResource(R.drawable.ic_menu_main);
+        FloatingActionButton actionButton = new FloatingActionButton.Builder(this).setContentView(icon).build();
+        SubActionButton.Builder itemBuilder = new SubActionButton.Builder(this);
+        //add menu buttons
+        ImageView itemChoose = new ImageView(this);
+        ImageView itemSetting = new ImageView(this);
+        ImageView itemMore = new ImageView(this);
+        itemChoose.setImageResource(R.drawable.ic_choose);
+        itemSetting.setImageResource(R.drawable.ic_setting);
+        itemMore.setImageResource(R.drawable.ic_more);
+        SubActionButton btnChoose = itemBuilder.setContentView(itemChoose).build();
+        SubActionButton btnSetting = itemBuilder.setContentView(itemSetting).build();
+        SubActionButton btnMore = itemBuilder.setContentView(itemMore).build();
+        FloatingActionMenu actionMenu = new FloatingActionMenu.Builder(this).addSubActionView(btnMore).addSubActionView(btnSetting).addSubActionView(btnChoose).attachTo(actionButton).build();
 
 
         /**
@@ -192,7 +209,18 @@ public class WeatherActivity extends AppCompatActivity {
                         } else {
                             Toast.makeText(WeatherActivity.this, "获取天气信息失败", Toast.LENGTH_SHORT).show();
                         }
-                        circleRefreshLayout.finishRefreshing();
+
+                        /**
+                         * 设置一个两秒的延迟让下拉刷新动画完成
+                         */
+                        new Handler(new Handler.Callback() {
+
+                            @Override
+                            public boolean handleMessage(Message arg0) {
+                                circleRefreshLayout.finishRefreshing();
+                                return false;
+                            }
+                        }).sendEmptyMessageDelayed(0, 2000);
                     }
                 });
             }
@@ -204,7 +232,18 @@ public class WeatherActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         Toast.makeText(WeatherActivity.this, "获取天气信息失败", Toast.LENGTH_SHORT).show();
-                        circleRefreshLayout.finishRefreshing();
+                        /**
+                         * 设置一个两秒的延迟让下拉刷新动画完成
+                         */
+                        new Handler(new Handler.Callback() {
+
+                            @Override
+                            public boolean handleMessage(Message arg0) {
+                                circleRefreshLayout.finishRefreshing();
+                                return false;
+                            }
+                        }).sendEmptyMessageDelayed(0, 2000);
+
                     }
                 });
             }
@@ -262,6 +301,8 @@ public class WeatherActivity extends AppCompatActivity {
             TextView infoText = (TextView) view.findViewById(R.id.info_text);
             TextView maxText = (TextView) view.findViewById(R.id.max_text);
             TextView minText = (TextView) view.findViewById(R.id.min_text);
+            ImageView wetpic=(ImageView) view.findViewById(R.id.weather_pic1);
+
             dateText.setText(forecast.date);
             infoText.setText(forecast.more.info);
             maxText.setText(forecast.temperature.max);
@@ -269,6 +310,29 @@ public class WeatherActivity extends AppCompatActivity {
             forecastLayout.addView(view);
             String uv=forecast.uv;
             mUv=uv;
+
+            wet1=forecast.more.info;
+            if (wet1.contains("雷")){
+                wetpic.setImageResource(R.drawable.storm);
+            }else if (wet1.contains("雨")){
+                wetpic.setImageResource(R.drawable.rain);
+            }else if (wet1.contains("云")){
+                if (wet1.contains("晴")){
+                    wetpic.setImageResource(R.drawable.cloudy);
+                }else {
+                    wetpic.setImageResource(R.drawable.overcast);
+                }
+            }else if (wet1.contains("晴")){
+                wetpic.setImageResource(R.drawable.sunny);
+            }else if (wet1.contains("雪")){
+                wetpic.setImageResource(R.drawable.snow);
+            }else if (wet1.contains("雾")){
+                wetpic.setImageResource(R.drawable.mist);
+            }else if (wet1.contains("阴")){
+                wetpic.setImageResource(R.drawable.overcast);
+            }
+
+
         }
             uvText.setText(mUv);
 
@@ -279,6 +343,7 @@ public class WeatherActivity extends AppCompatActivity {
             TextView weatherText=(TextView) view.findViewById(R.id.weather_text);
             TextView tempText = (TextView) view.findViewById(R.id.temp_text);
             TextView dirText=(TextView) view.findViewById(R.id.dir_text);
+            ImageView wetIm=(ImageView) view.findViewById(R.id.weather_pic);
 
             str=hourlyForecast.time;
             length=str.length();
@@ -287,6 +352,29 @@ public class WeatherActivity extends AppCompatActivity {
             tempText.setText(hourlyForecast.temp + "℃");
             dirText.setText(hourlyForecast.wind.dir);
             hourlyForecastLayout.addView(view);
+
+            wet=hourlyForecast.more.wet;
+
+            if (wet.contains("雷")){
+                wetIm.setImageResource(R.drawable.storm);
+            }else if (wet.contains("雨")){
+                wetIm.setImageResource(R.drawable.rain);
+            }else if (wet.contains("云")){
+                if (wet.contains("晴")){
+                    wetIm.setImageResource(R.drawable.cloudy);
+                }else {
+                    wetIm.setImageResource(R.drawable.overcast);
+                }
+            }else if (wet.contains("晴")){
+                wetIm.setImageResource(R.drawable.sunny);
+            }else if (wet.contains("雪")){
+                wetIm.setImageResource(R.drawable.snow);
+            }else if (wet.contains("雾")){
+                wetIm.setImageResource(R.drawable.mist);
+            }else if (wet.contains("阴")){
+                wetIm.setImageResource(R.drawable.overcast);
+            }
+
         }
 
         String comfort = "舒适度：" + weather.suggestion.comfort.info;

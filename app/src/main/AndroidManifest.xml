@@ -6,21 +6,14 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        tools:replace="android:icon, android:theme"
         android:name="org.litepal.LitePalApplication"
         android:allowBackup="true"
         android:icon="@mipmap/soft_icon"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".LoginLayout">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".MainActivity"></activity>
+        android:theme="@style/AppTheme"
+        tools:replace="android:icon, android:theme">
+        <activity android:name=".MainActivity" />
         <activity android:name=".WeatherActivity" />
 
         <service
@@ -28,7 +21,14 @@
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".AboutHaos"></activity>
+        <activity android:name=".FloatingText">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Login"></activity>
     </application>
 
 </manifest>
