@@ -2,8 +2,11 @@ package com.coolweather.android;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,7 +18,10 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
+import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -30,12 +36,12 @@ import com.coolweather.android.gson.Weather;
 import com.coolweather.android.service.AutoUpdateService;
 import com.coolweather.android.util.HttpUtil;
 import com.coolweather.android.util.Utility;
-import com.oguzdev.circularfloatingactionmenu.library.FloatingActionButton;
-import com.oguzdev.circularfloatingactionmenu.library.FloatingActionMenu;
-import com.oguzdev.circularfloatingactionmenu.library.SubActionButton;
+
 import com.tuesda.walker.circlerefresh.CircleRefreshLayout;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -50,6 +56,8 @@ public class WeatherActivity extends AppCompatActivity {
     private ScrollView weatherLayout;
 
     private Button navButton;
+
+    private ImageView refreshIv;
 
     private TextView titleCity;
 
@@ -79,18 +87,25 @@ public class WeatherActivity extends AppCompatActivity {
 
     private static String mUv;
 
+
     private String str;
     private int length;
 
-    private ImageView icon;
+
     private String wet;
     private String wet1;
+
+    private TextView uvBtn;
+    private TextView visBtn;
+    private TextView helpTitle;
+    private TextView helpText;
+    private LinearLayout uvShow;
+    private boolean clickTimes1;
+    private boolean clickTimes2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
 
         if (Build.VERSION.SDK_INT >= 21) {
             View decorView = getWindow().getDecorView();
@@ -108,8 +123,14 @@ public class WeatherActivity extends AppCompatActivity {
         weatherInfoText = (TextView) findViewById(R.id.weather_info_text);
         forecastLayout = (LinearLayout) findViewById(R.id.forecast_layout);
         hourlyForecastLayout=(LinearLayout) findViewById(R.id.hourly_forecast_layout);
-
-        icon=new ImageView(this);
+        uvBtn=(TextView) findViewById(R.id.help_uv_btn);
+        uvBtn.setText(" more ");
+        visBtn=(TextView) findViewById(R.id.help_vis_btn);
+        visBtn.setText(" more ");
+        uvShow=(LinearLayout) findViewById(R.id.uv_help);
+        helpTitle=(TextView) findViewById(R.id.help_title);
+        helpText=(TextView) findViewById(R.id.help_text);
+        refreshIv=(ImageView) findViewById(R.id.refresh_iv);
 
         uvText = (TextView) findViewById(R.id.uv_text);
         visText = (TextView) findViewById(R.id.vis_text);
@@ -133,33 +154,87 @@ public class WeatherActivity extends AppCompatActivity {
             requestWeather(mWeatherId);
         }
 
+
+
+
         /**
-         * circular menu
+         * 显示uv和vis具体按钮监听
          */
-        icon.setImageResource(R.drawable.ic_menu_main);
-        FloatingActionButton actionButton = new FloatingActionButton.Builder(this).setContentView(icon).build();
-        SubActionButton.Builder itemBuilder = new SubActionButton.Builder(this);
-        //add menu buttons
-        ImageView itemChoose = new ImageView(this);
-        ImageView itemSetting = new ImageView(this);
-        ImageView itemMore = new ImageView(this);
-        itemChoose.setImageResource(R.drawable.ic_choose);
-        itemSetting.setImageResource(R.drawable.ic_setting);
-        itemMore.setImageResource(R.drawable.ic_more);
-        SubActionButton btnChoose = itemBuilder.setContentView(itemChoose).build();
-        SubActionButton btnSetting = itemBuilder.setContentView(itemSetting).build();
-        SubActionButton btnMore = itemBuilder.setContentView(itemMore).build();
-        FloatingActionMenu actionMenu = new FloatingActionMenu.Builder(this).addSubActionView(btnMore).addSubActionView(btnSetting).addSubActionView(btnChoose).attachTo(actionButton).build();
+        clickTimes1=false;
+        clickTimes2=false;
+        uvBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickTimes1=!clickTimes1;
+                if (clickTimes1) {
+                    if(!clickTimes2){
+                        uvBtn.setText(" fold ");
+                        helpTitle.setText(R.string.help_uv_title);
+                        helpText.setText(R.string.help_uv_text);
+                        uvShow.setVisibility(uvShow.VISIBLE);
+                    }else {
+                        visBtn.setText(" more ");
+                        clickTimes2=!clickTimes2;
+                        uvBtn.setText(" fold ");
+                        helpTitle.setText(R.string.help_uv_title);
+                        helpText.setText(R.string.help_uv_text);
+                        uvShow.setVisibility(uvShow.VISIBLE);
+                    }
+                }else {
+                    uvBtn.setText(" more ");
+                    uvShow.setVisibility(uvShow.GONE);
+                }
+            }
+        });
+
+        visBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickTimes2=!clickTimes2;
+                if (clickTimes2) {
+                    if (!clickTimes1){
+                        visBtn.setText(" fold ");
+                        helpTitle.setText(R.string.help_vis_title);
+                        helpText.setText(R.string.help_vis_text);
+                        uvShow.setVisibility(uvShow.VISIBLE);
+                    }else {
+                        uvBtn.setText(" more ");
+                        clickTimes1=!clickTimes1;
+                        visBtn.setText(" fold ");
+                        helpTitle.setText(R.string.help_vis_title);
+                        helpText.setText(R.string.help_vis_text);
+                        uvShow.setVisibility(uvShow.VISIBLE);
+                    }
+                }else {
+                    visBtn.setText(" more ");
+                    uvShow.setVisibility(uvShow.GONE);
+                }
+            }
+        });
+
+
+
+
+        refreshIv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                requestWeather(mWeatherId);
+                loadBingPic();
+            }
+        });
 
 
         /**
          * CircleRefresh控件监听
          */
+/*
+
+
         circleRefreshLayout.setOnRefreshListener(new CircleRefreshLayout.OnCircleRefreshListener() {
             @Override
             public void refreshing() {
-                loadBingPic();
                 requestWeather(mWeatherId);
+                loadBingPic();
             }
 
             @Override
@@ -168,6 +243,8 @@ public class WeatherActivity extends AppCompatActivity {
             }
 
         });
+*/
+
 
         /**
          * 选择地区按钮监听
@@ -213,6 +290,7 @@ public class WeatherActivity extends AppCompatActivity {
                         /**
                          * 设置一个两秒的延迟让下拉刷新动画完成
                          */
+                        /*
                         new Handler(new Handler.Callback() {
 
                             @Override
@@ -221,9 +299,12 @@ public class WeatherActivity extends AppCompatActivity {
                                 return false;
                             }
                         }).sendEmptyMessageDelayed(0, 2000);
+                        */
+
                     }
                 });
             }
+
 
             @Override
             public void onFailure(Call call, IOException e) {
@@ -232,9 +313,11 @@ public class WeatherActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         Toast.makeText(WeatherActivity.this, "获取天气信息失败", Toast.LENGTH_SHORT).show();
+
                         /**
                          * 设置一个两秒的延迟让下拉刷新动画完成
                          */
+            /*
                         new Handler(new Handler.Callback() {
 
                             @Override
@@ -243,10 +326,13 @@ public class WeatherActivity extends AppCompatActivity {
                                 return false;
                             }
                         }).sendEmptyMessageDelayed(0, 2000);
+            */
+
 
                     }
                 });
             }
+
         });
         loadBingPic();
     }
@@ -268,15 +354,19 @@ public class WeatherActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         Glide.with(WeatherActivity.this).load(bingPic).into(bingPicImg);
-                        circleRefreshLayout.finishRefreshing();                   }
+
+                        //circleRefreshLayout.finishRefreshing();
+                                       }
                 });
+
             }
 
             @Override
             public void onFailure(Call call, IOException e) {
                 e.printStackTrace();
                 Toast.makeText(WeatherActivity.this,"加载背景失败...",Toast.LENGTH_SHORT).show();
-                circleRefreshLayout.finishRefreshing();
+
+                //circleRefreshLayout.finishRefreshing();
             }
         });
     }

@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary">
+
+        <TextView
+            android:id="@+id/title_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textColor="#fff"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/back_button"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="10dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/ic_back"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#fff">
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#000"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.5"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="4"
+            android:orientation="vertical">
+            <EditText
+                android:id="@+id/create_account_edt"
+                style="@style/mty_sign_in_edt"
+                android:hint="@string/user_name" />
+
+
+            <EditText
+                android:id="@+id/create_password_edt"
+                style="@style/mty_sign_in_edt"
+                android:layout_marginTop="8dp"
+                android:hint="@string/pass"
+                android:inputType="textPassword"/>
+            <EditText
+                android:id="@+id/create_repassword_edt"
+                style="@style/mty_sign_in_edt"
+                android:layout_marginTop="8dp"
+                android:hint="@string/comfir_pass"
+                android:inputType="textPassword"/>
+
+
+            <LinearLayout
+                android:id="@+id/create_name_warning"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/wrong" />
+
+                <TextView
+                    android:id="@+id/warning_name_tv"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#e5ffffff" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/create_pass_warning"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/wrong" />
+
+                <TextView
+                    android:id="@+id/warning_pass_tv"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#e5ffffff" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/create_repass_warning"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/wrong" />
+
+                <TextView
+                    android:id="@+id/warning_repass_tv"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#e5ffffff" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2">
+            <Button
+                android:id="@+id/create_account_btn"
+                style="@style/mty_create_account_btn"
+                android:text="@string/create"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="4.5"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/signin_ly"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:gravity="center">
+
+                <TextView
+                    style="@style/mty_sign_in_tv"
+                    android:text="@string/had_account"/>
+
+                <ImageView
+                    style="@style/mty_sign_in_iv"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/reset_password_ly"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:gravity="center">
+
+                <TextView
+                    style="@style/mty_sign_in_tv"
+                    android:text="@string/reset_password"/>
+
+                <ImageView
+                    style="@style/mty_sign_in_iv"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

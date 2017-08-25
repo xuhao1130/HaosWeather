@@ -8,4 +8,47 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+
+
+    <style name="mty_sign_in_edt">
+        <item name="android:textColorHint">#565861</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:textColor">#393939</item>
+        <item name="android:layout_height">35dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:paddingLeft">20dp</item>
+        <item name="android:background">@drawable/mty_shape_edittext_bg</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:maxLines">1</item>
+    </style>
+
+    <style name="login_editText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@null</item>
+        <item name="android:layout_marginLeft">15dp</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="mty_create_account_btn">
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">#F2CB2F</item>
+        <item name="android:layout_height">45dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">@drawable/mty_selector_button_default</item>
+    </style>
+
+    <style name="mty_sign_in_iv">
+        <item name="android:layout_height">12dp</item>
+        <item name="android:layout_width">12dp</item>
+        <item name="android:src">@drawable/mty_next_icon</item>
+    </style>
+    <style name="mty_sign_in_tv">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#FCFCFA</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_marginRight">5dp</item>
+    </style>
 </resources>

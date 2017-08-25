@@ -4,4 +4,53 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorNow">#845a33</color>
+
+
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="red">#ff0000</color>
+
+    <!-- ODM -->
+    <!--<color name="sys_blue_dark">#029bf1</color>-->
+    <!--<color name="sys_blue">#18b9f1</color>-->
+    <color name="sys_blue_dark">#000000</color>
+    <color name="sys_blue">#2f3238</color>
+    <color name="sys_blue_">#ebfaff</color>
+    <color name="sys_text_gray">#AAAAAA</color>
+    <color name="sys_press">#dcdcdc</color>
+    <color name="sys_white_bg_press">#dcdcdc</color>
+
+    <color name="sys_divider">#dcdcdc</color>
+    <color name="sys_text_default">#333333</color>
+
+
+    <color name="sys_my_setting_bg">#ECFAFF</color>
+    <color name="sys_my_setting_line">#ddd</color>
+
+    <color name="my_local_head_tv_unchecked">#80FFFFFF</color>
+    <color name="my_local_bottom_line">#dddddd</color>
+    <color name="my_local_section_title_bg">#F2F2F2</color>
+
+    <color name="native_play_popup_bg">#d5000000</color>
+
+
+    <!-- MTY -->
+    <color name="mty_sys_bg">#f6f6f6</color>
+    <color name="mty_sys_gray">#2F3238</color>
+    <color name="mty_sys_line">#dddddd</color>
+    <color name="mty_sys_login_bg">#2f3238</color>
+    <color name="mty_login_et_bg">#FF191A1D</color>
+    <color name="mty_login_text_color">#7F8289</color>
+    <color name="mty_login_btn_bg">#26292E</color>
+    <color name="mty_login_yellow">#FFDFB831</color>
+
+    <color name="mty_sys_red">#FF6E6E</color>
+    <color name="mty_sys_red_tra">#90FF6E6E</color>
+    <color name="mty_sys_green">#FF15DF26</color>
+    <color name="mty_sys_green_tra">#9015DF26</color>
+
+    <color name="mty_cancel_btn_text_color">#FF6E6E</color>
+
+    <color name="mty_select_device_text_color">#FF96B8D3</color>
+    <color name="transparent">#00000000</color>
 </resources>

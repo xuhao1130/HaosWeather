@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Haos 天气</string>
+    <string name="app_name">Haos Weather</string>
     <string name="about_haos_title">About Haos Weather</string>
     <string name="about_haos_text">
         这是一款遍及中国各地的天气预报APP，你可以自由切换查看各个城市的天气信息以及小建议。更多功能正待开发，敬请期待。
@@ -10,4 +10,29 @@
     <string name="version">版本号2.1.0</string>
     <string name="login">Login</string>
     <string name="version_mes">本次更新：修复了AQI和PM2.5指数没有显示的问题； 新增了下拉刷新的动画效果 ；更正了生活建议的内容。</string>
+    <string name="help_uv_title">关于UV指数</string>
+    <string name="help_uv_text">UV指数一般从0开始，一直到10(含大于10)为终，根据这些数值，气象局将紫外线指数的预报等级划分为五级。\nUV指数值0到2，一般为阴或雨天，此时紫外线强度最弱，预报等级为一级；\nUV指数值3到4，一般为多云天气，此时紫外线强度较弱，预报等级为二级；\nUV指数值5到6，一般为少云天气，此时紫外线强度较强，预报等级为三级；\nUV指数值7到9，一般为晴天无云，此时紫外线强度很强，预报等级为四级；\nUV指数值达到或超过10，多为夏季晴日，紫外线强度特别强，预报等级为五级。</string>
+    <string name="help_vis_title">关于VIS指数</string>
+    <string name="help_vis_text">VIS≤80为优，80＜VIS≤120为良，120＜VIS≤150为中，VIS＞150为差，其中，优、良、中均为合格；差为不合格。</string>
+    <string name="user_name">User Name</string>
+    <string name="pass">Password</string>
+    <string name="comfir_pass">Comfirm Password</string>
+    <string name="signin">Sign In</string>
+    <string name="reset_password">重设密码 reset password</string>
+    <string name="create_account">注册用户 create an account</string>
+    <string name="had_account">直接登录 already have an account</string>
+    <string name="create">Create Account</string>
+    <string name="reset">Reset Password</string>
+    <string name="old_pass">Old Password</string>
+    <string name="New_pass">New Password</string>
+
+    <string name="wrong_name">用户名格式错误！请输入以中文或字母开头的汉字、字母或数字的组合</string>
+    <string name="wrong_pass">密码格式错误！请输入6～21位字母和数字的组合</string>
+    <string name="pass_not_match">用户名或密码错误</string>
+    <string name="name_not_exist">用户名不存在，请重新输入或重新注册</string>
+    <string name="repass_not_match">两次输入的密码不匹配</string>
+    <string name="reset_pass_wrong">请输入正确的新密码格式！（6～21字母和数字组合）</string>
+    <string name="remember_password">Remember Password</string>
+
+
 </resources>

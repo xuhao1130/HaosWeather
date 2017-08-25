@@ -37,20 +37,22 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="2"/>
-        <Button
-            android:id="@+id/login_btn"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.5"
-            android:background="@drawable/selector_login_btn"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
-            android:text="@string/login"
-            android:textColor="#000"/>
+            android:layout_weight="2"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/wait_tips"
+                android:visibility="invisible"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textColor="#fff"
+                android:text="loading...please wait..."/>
+        </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="2"/>
+
     </LinearLayout>
 </LinearLayout>

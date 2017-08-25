@@ -1,7 +1,8 @@
-apply plugin: 'com.android.application'
 
+apply plugin: 'com.android.application'
+apply plugin: 'android-apt'
 android {
-    compileSdkVersion 25
+    compileSdkVersion 24
     buildToolsVersion '25.0.0'
 
     aaptOptions {
@@ -35,6 +36,13 @@ dependencies {
     compile 'com.google.code.gson:gson:2.7'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.bigkoo:quicksidebar:1.0.3'
-    compile 'com.oguzdev:CircularFloatingActionMenu:1.0.2'
+    compile 'com.yalantis:contextmenu:1.0.7'
     testCompile 'junit:junit:4.12'
+
+    compile 'com.jakewharton:butterknife:8.4.0'
+    apt 'com.jakewharton:butterknife-compiler:8.4.0'
+
+
+
+
 }

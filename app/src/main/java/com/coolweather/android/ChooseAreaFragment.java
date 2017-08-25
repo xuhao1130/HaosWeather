@@ -1,6 +1,6 @@
 package com.coolweather.android;
 
-import android.app.ProgressDialog;
+import  android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -152,7 +152,7 @@ public class ChooseAreaFragment extends Fragment {
             listView.setSelection(0);
             currentLevel = LEVEL_PROVINCE;
         } else {
-            String address = "&key=bc0418b57b2d4918819d3974ac1285d9";
+            String address = "http://guolin.tech/api/china";
             queryFromServer(address, "province");
         }
     }

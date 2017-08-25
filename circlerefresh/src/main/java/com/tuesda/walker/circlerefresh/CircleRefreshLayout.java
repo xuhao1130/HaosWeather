@@ -15,7 +15,7 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.FrameLayout;
 
 /**
- * Created by zhanglei on 15/7/20.
+ * Created by HaoXu on 15/7/20.
  */
 public class CircleRefreshLayout extends FrameLayout {
 
