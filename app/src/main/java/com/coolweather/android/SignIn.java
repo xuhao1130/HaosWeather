@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class SignIn extends AppCompatActivity {
@@ -25,7 +26,6 @@ public class SignIn extends AppCompatActivity {
     @BindView(R.id.signin_account_edt)EditText account;
     @BindView(R.id.signin_password_edt)EditText password;
     @BindView(R.id.back_button)Button back;
-    @BindView(R.id.time_text)TextView title;
     @BindView(R.id.remember_pass_cb)CheckBox remember;
 
     @BindView(R.id.signin_warning)LinearLayout warn;
@@ -36,9 +36,8 @@ public class SignIn extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activtity_sign_in);
-        title.setText(R.string.app_name);
         pref= PreferenceManager.getDefaultSharedPreferences(this);
-        back.setVisibility(back.INVISIBLE);
+        ButterKnife.bind(this);
 
 
         boolean isRemember=pref.getBoolean("remember_password",false);

@@ -1,6 +1,7 @@
 package com.coolweather.android.service;
 
 import android.app.AlarmManager;
+import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.coolweather.android.MainActivity;
 import com.coolweather.android.R;
 import com.coolweather.android.WeatherActivity;
 import com.coolweather.android.gson.Weather;
@@ -26,6 +28,8 @@ import okhttp3.Response;
 
 public class AutoUpdateService extends Service {
 
+    private static final int NOTIFICATION_ID = 10;
+
     @Override
     public IBinder onBind(Intent intent) {
         return null;
@@ -33,8 +37,10 @@ public class AutoUpdateService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        startForeground(this);
         updateWeather();
         updateBingPic();
+/**
         AlarmManager manager = (AlarmManager) getSystemService(ALARM_SERVICE);
         int anHour = 8 * 60 * 60 * 1000; // 这是8小时的毫秒数
         long triggerAtTime = SystemClock.elapsedRealtime() + anHour;
@@ -42,7 +48,13 @@ public class AutoUpdateService extends Service {
         PendingIntent pi = PendingIntent.getService(this, 0, i, 0);
         manager.cancel(pi);
         manager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, triggerAtTime, pi);
+*/
         return super.onStartCommand(intent, flags, startId);
+    }
+
+    private static void startForeground(Service service){
+        Notification notification = new Notification.Builder(service).getNotification();
+        service.startForeground(NOTIFICATION_ID,notification);
     }
 
     /**
